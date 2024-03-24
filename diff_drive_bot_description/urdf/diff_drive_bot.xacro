@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<robot name="diff_drive_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find diff_drive_bot_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find diff_drive_bot_description)/urdf/diff_drive_bot.trans" />
+<xacro:include filename="$(find diff_drive_bot_description)/urdf/diff_drive_bot.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.018865120933738124 0.0 0.004844242660722088" rpy="0 0 0"/>
+    <mass value="0.4557002479016382"/>
+    <inertia ixx="0.000132" iyy="0.00036" izz="0.000483" ixy="0.0" iyz="0.0" ixz="3e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://diff_drive_bot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://diff_drive_bot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_right_1">
+  <inertial>
+    <origin xyz="-1.4901907659237157e-10 0.0040000000000000036 7.450580256918027e-11" rpy="0 0 0"/>
+    <mass value="0.04315762907868972"/>
+    <inertia ixx="3e-06" iyy="5e-06" izz="3e-06" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.01 -0.03 -0.005" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://diff_drive_bot_description/meshes/wheel_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.01 -0.03 -0.005" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://diff_drive_bot_description/meshes/wheel_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_left_1">
+  <inertial>
+    <origin xyz="-1.4901907659237157e-10 -0.0040000000000000036 7.450580256918027e-11" rpy="0 0 0"/>
+    <mass value="0.04315762907868972"/>
+    <inertia ixx="3e-06" iyy="5e-06" izz="3e-06" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.01 0.03 -0.005" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://diff_drive_bot_description/meshes/wheel_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.01 0.03 -0.005" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://diff_drive_bot_description/meshes/wheel_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rev_right" type="continuous">
+  <origin xyz="-0.01 0.03 0.005" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_right_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Rev_left" type="continuous">
+  <origin xyz="-0.01 -0.03 0.005" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_left_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+</robot>
